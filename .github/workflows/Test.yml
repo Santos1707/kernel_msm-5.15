@@ -140,12 +140,12 @@ jobs:
         run: |
           rm -rf ./KernelSU ./drivers/kernelsu
           
-          echo "📦 Installing Wild KSU..."
+          echo "📦 Installing KSU..."
 
-          # Install WildKSU with SUSFS
-          curl -LSs "https://raw.githubusercontent.com/WildKernels/Wild_KSU/wild/kernel/setup.sh" | bash -s stable
-      
-          echo "✔ Wild KSU installed successfully"
+          # Install KSU with SUSFS
+
+          curl -LSs "https://raw.githubusercontent.com/ReSukiSU/ReSukiSU/main/kernel/setup.sh" | bash
+          echo "✔ KSU installed successfully"
           
           # Clone SUSFS4KSU for kernel patches only (not KSU integration)
           echo "📦 Cloning SUSFS4KSU for kernel patches..."
