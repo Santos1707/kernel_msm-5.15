@@ -228,7 +228,18 @@ jobs:
         working-directory: ./${{ env.kernelDir }}/${{ env.kernelName }}
         run: |
           curl -sL "https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch" | git apply -v --ignore-whitespace
-
+      - name: "🔧 Corrigir erros de compilação no FUSE"
+        working-directory: ./${{ env.kernelDir }}/${{ env.kernelName }}
+        run: |
+          echo "🛠 Corrigindo fs/fuse/dev.c..."
+          
+          # 1. Substituir os 'dprintk' problemáticos por 'pr_debug' ou comentar a linha de log
+          sed -i 's/dprintk("Request finished/pr_debug("Request finished/g' fs/fuse/dev.c
+          sed -i 's/dprintk("Interrupt already queued/pr_debug("Interrupt already queued/g' fs/fuse/dev.c
+          
+          # 2. Corrigir o uso da flag inexistente FR_INTR_QUEUED para a sugerida FR_INTERRUPTED
+          sed -i 's/FR_INTR_QUEUED/FR_INTERRUPTED/g' fs/fuse/dev.c
+          
       - name: "🔨 Build kernel"
         working-directory: ${{ env.WORK_DIR }}
         run: |
