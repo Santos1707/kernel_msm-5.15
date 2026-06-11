@@ -212,7 +212,7 @@ static uint64_t find_deviation(struct lpm_cpu *cpu_gov, int *samples_history,
 	 * If the deviation is less, return the average, else
 	 * ignore one maximum sample and retry
 	 */
-		if (((avg > stddev * 6) && (divisor >= (MAXSAMPLES - 1)))
+		if (((avg > stddev * 4) && (divisor >= (MAXSAMPLES - 1)))
 					|| stddev <= PRED_REF_STDDEV) {
 			do_div(duration_ns, NSEC_PER_USEC);
 			if (avg >= duration_ns ||
@@ -301,7 +301,7 @@ static void cpu_predict(struct lpm_cpu *cpu_gov, u64 duration_ns)
 			}
 		}
 
-		if (count >= PRED_PREMATURE_CNT) {
+		if (count >= PRED_PREMATURE_CNT + 2)) {
 			do_div(avg_residency, count);
 			cpu_gov->predicted = avg_residency;
 			cpu_gov->next_pred_time = ktime_to_us(cpu_gov->now)
@@ -553,7 +553,7 @@ static int start_prediction_timer(struct lpm_cpu *cpu_gov, int duration_us)
 
 	s = &cpu_gov->drv->states[0];
 	max_residency  = s[cpu_gov->last_idx + 1].target_residency - 1;
-	htime = cpu_gov->predicted + PRED_TIMER_ADD;
+	htime = cpu_gov->predicted + (PRED_TIMER_ADD / 2);
 
 	if (htime > max_residency)
 		htime = max_residency;
