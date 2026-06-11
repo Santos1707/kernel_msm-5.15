@@ -1111,15 +1111,15 @@ void walt_tunables(void)
 		sysctl_sched_early_down[i] = 1204;
 	}
 
-	sysctl_sched_group_upmigrate_pct = 100;
+	sysctl_sched_group_upmigrate_pct = 90;
 
-	sysctl_sched_group_downmigrate_pct = 95;
+	sysctl_sched_group_downmigrate_pct = 80;
 
 	sysctl_sched_asym_cap_sibling_freq_match_pct = 100;
 
 	sysctl_sched_task_unfilter_period = 100000000;
 
-	sysctl_sched_window_stats_policy = WINDOW_STATS_MAX_RECENT_AVG;
+	sysctl_sched_window_stats_policy = WINDOW_STATS_RECENT;
 
 	sysctl_sched_ravg_window_nr_ticks = (HZ / NR_WINDOWS_PER_SEC);
 
