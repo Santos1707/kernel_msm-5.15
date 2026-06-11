@@ -80,7 +80,7 @@ struct irq_work walt_migration_irq_work;
 unsigned int walt_rotation_enabled;
 cpumask_t asym_cap_sibling_cpus = CPU_MASK_NONE;
 
-unsigned int __read_mostly sched_ravg_window = 20000000;
+unsigned int __read_mostly sched_ravg_window = 16000000;
 int min_possible_cluster_id;
 int max_possible_cluster_id;
 /* Initial task load. Newly created tasks are assigned this load. */
@@ -186,7 +186,7 @@ static inline u64 walt_rq_clock(struct rq *rq)
 
 static unsigned int walt_cpu_high_irqload;
 
-static __read_mostly unsigned int sched_io_is_busy = 1;
+static __read_mostly unsigned int sched_io_is_busy = 0;
 
 /* Window size (in ns) */
 static __read_mostly unsigned int new_sched_ravg_window = DEFAULT_SCHED_RAVG_WINDOW;
@@ -195,7 +195,7 @@ static DEFINE_SPINLOCK(sched_ravg_window_lock);
 static u64 sched_ravg_window_change_time;
 
 static unsigned int __read_mostly sched_init_task_load_windows_scaled;
-static unsigned int __read_mostly sysctl_sched_init_task_load_pct = 15;
+static unsigned int __read_mostly sysctl_sched_init_task_load_pct = 20;
 
 /* Size of bitmaps maintained to track top tasks */
 static const unsigned int top_tasks_bitmap_size =
