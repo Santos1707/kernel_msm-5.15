@@ -301,7 +301,7 @@ static void cpu_predict(struct lpm_cpu *cpu_gov, u64 duration_ns)
 			}
 		}
 
-		if (count >= PRED_PREMATURE_CNT + 2)) {
+		if (count >= (PRED_PREMATURE_CNT + 2)) {
 			do_div(avg_residency, count);
 			cpu_gov->predicted = avg_residency;
 			cpu_gov->next_pred_time = ktime_to_us(cpu_gov->now)
