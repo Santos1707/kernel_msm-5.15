@@ -74,7 +74,7 @@ unsigned int sysctl_sched_sync_hint_enable = 1;
 unsigned int sysctl_panic_on_walt_bug = walt_debug_initial_values();
 unsigned int sysctl_sched_suppress_region2;
 unsigned int sysctl_sched_skip_sp_newly_idle_lb = 1;
-unsigned int sysctl_sched_hyst_min_coloc_ns = 80000000;
+unsigned int sysctl_sched_hyst_min_coloc_ns = 40000000;
 unsigned int sysctl_sched_asymcap_boost;
 unsigned int sysctl_sched_long_running_rt_task_ms;
 unsigned int sysctl_sched_idle_enough;
@@ -1140,8 +1140,13 @@ void walt_tunables(void)
 
 	sched_ravg_window = DEFAULT_SCHED_RAVG_WINDOW;
 
-	sysctl_input_boost_ms = 40;
-
-	for (i = 0; i < 8; i++)
-		sysctl_input_boost_freq[i] = 0;
+	sysctl_input_boost_ms = 90;
+    sysctl_input_boost_freq[0] = 1305600;
+    sysctl_input_boost_freq[1] = 1305600;
+    sysctl_input_boost_freq[2] = 1305600;
+    sysctl_input_boost_freq[3] = 1305600;
+    sysctl_input_boost_freq[4] = 1497600;
+    sysctl_input_boost_freq[5] = 1497600;
+    sysctl_input_boost_freq[6] = 1497600;
+    sysctl_input_boost_freq[7] = 1497600;
 }
