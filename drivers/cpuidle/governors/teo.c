@@ -112,13 +112,13 @@
  * is used for decreasing metrics on a regular basis.
  */
 #define PULSE		1024
-#define DECAY_SHIFT	3
+#define DECAY_SHIFT	5
 
 /*
  * Number of the most recent idle duration values to take into consideration for
  * the detection of recent early wakeup patterns.
  */
-#define NR_RECENT	9
+#define NR_RECENT	7
 
 /**
  * struct teo_bin - Metrics used by the TEO cpuidle governor.
@@ -188,9 +188,9 @@ static void teo_update(struct cpuidle_driver *drv, struct cpuidle_device *dev)
 		 * approximation of the average of it.
 		 */
 		if (measured_ns >= lat_ns)
-			measured_ns -= lat_ns / 2;
+			measured_ns -= lat_ns / 4;
 		else
-			measured_ns /= 2;
+			measured_ns = (measured_ns * 3) / 4;
 	}
 
 	cpu_data->total = 0;
