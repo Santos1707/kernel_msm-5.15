@@ -74,7 +74,7 @@ unsigned int sysctl_sched_sync_hint_enable = 1;
 unsigned int sysctl_panic_on_walt_bug = walt_debug_initial_values();
 unsigned int sysctl_sched_suppress_region2;
 unsigned int sysctl_sched_skip_sp_newly_idle_lb = 1;
-unsigned int sysctl_sched_hyst_min_coloc_ns = 40000000;
+unsigned int sysctl_sched_hyst_min_coloc_ns = 10000000;
 unsigned int sysctl_sched_asymcap_boost;
 unsigned int sysctl_sched_long_running_rt_task_ms;
 unsigned int sysctl_sched_idle_enough;
@@ -1107,8 +1107,8 @@ void walt_tunables(void)
 	for (i = 0; i < MAX_MARGIN_LEVELS; i++) {
 		sysctl_sched_capacity_margin_up_pct[i] = 95; /* ~5% margin */
 		sysctl_sched_capacity_margin_dn_pct[i] = 85; /* ~15% margin */
-		sysctl_sched_early_up[i] = 1077;
-		sysctl_sched_early_down[i] = 1204;
+		sysctl_sched_early_up[i] = 1150;
+		sysctl_sched_early_down[i] = 1100;
 	}
 
 	sysctl_sched_group_upmigrate_pct = 90;
@@ -1117,7 +1117,7 @@ void walt_tunables(void)
 
 	sysctl_sched_asym_cap_sibling_freq_match_pct = 100;
 
-	sysctl_sched_task_unfilter_period = 100000000;
+	sysctl_sched_task_unfilter_period = 20000000;
 
 	sysctl_sched_window_stats_policy = WINDOW_STATS_RECENT;
 
@@ -1126,9 +1126,9 @@ void walt_tunables(void)
 	sched_load_granule = DEFAULT_SCHED_RAVG_WINDOW / NUM_LOAD_INDICES;
 
 	for (i = 0; i < WALT_NR_CPUS; i++) {
-		sysctl_sched_coloc_busy_hyst_cpu[i] = 39000000;
+		sysctl_sched_coloc_busy_hyst_cpu[i] = 5000000;
 		sysctl_sched_coloc_busy_hyst_cpu_busy_pct[i] = 10;
-		sysctl_sched_util_busy_hyst_cpu[i] = 5000000;
+		sysctl_sched_util_busy_hyst_cpu[i] = 2000000;
 		sysctl_sched_util_busy_hyst_cpu_util[i] = 15;
 	}
 
