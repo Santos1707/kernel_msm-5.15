@@ -160,7 +160,7 @@ static void cluster_predict(struct lpm_cluster *cluster_gov)
 			}
 		}
 
-		if (count > PRED_PREMATURE_CNT) {
+		if (count > (PRED_PREMATURE_CNT + 2)) {
 			do_div(avg_residency, count);
 			cluster_gov->pred_wakeup = ktime_add_us(cluster_gov->now,
 								avg_residency);
@@ -271,7 +271,7 @@ static void cluster_power_down(struct lpm_cluster *cluster_gov)
 
 	residency = genpd->states[idx + 1].residency_ns;
 	do_div(residency, NSEC_PER_USEC);
-	clusttimer_start(cluster_gov, residency + PRED_TIMER_ADD);
+	clusttimer_start(cluster_gov, residency + (PRED_TIMER_ADD / 2));
 }
 
 /**
