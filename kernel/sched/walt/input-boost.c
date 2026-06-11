@@ -54,7 +54,7 @@ static bool sched_boost_active;
 
 static struct delayed_work input_boost_rem;
 static u64 last_input_time;
-#define MIN_INPUT_INTERVAL (50 * USEC_PER_MSEC)
+#define MIN_INPUT_INTERVAL (70 * USEC_PER_MSEC)
 
 static DEFINE_PER_CPU(struct freq_qos_request, qos_req);
 
@@ -235,20 +235,6 @@ static const struct input_device_id inputboost_ids[] = {
 			BIT_MASK(ABS_MT_POSITION_Y)
 		},
 	},
-	/* touchpad */
-	{
-		.flags = INPUT_DEVICE_ID_MATCH_KEYBIT |
-			INPUT_DEVICE_ID_MATCH_ABSBIT,
-		.keybit = { [BIT_WORD(BTN_TOUCH)] = BIT_MASK(BTN_TOUCH) },
-		.absbit = { [BIT_WORD(ABS_X)] =
-			BIT_MASK(ABS_X) | BIT_MASK(ABS_Y)
-		},
-	},
-	/* Keypad */
-	{
-		.flags = INPUT_DEVICE_ID_MATCH_EVBIT,
-		.evbit = { BIT_MASK(EV_KEY) },
-	},
 	{ },
 };
 
@@ -268,7 +254,7 @@ int input_boost_init(void)
 	struct cpufreq_policy *policy;
 	struct freq_qos_request *req;
 
-	input_boost_wq = alloc_workqueue("inputboost_wq", WQ_HIGHPRI, 0);
+	input_boost_wq = alloc_workqueue("inputboost_wq", WQ_UNBOUND, 0);
 	if (!input_boost_wq)
 		return -EFAULT;
 
