@@ -58,7 +58,7 @@ static inline void count_compact_events(enum vm_event_item item, long delta)
 /*
  * Fragmentation score check interval for proactive compaction purposes.
  */
-static const unsigned int HPAGE_FRAG_CHECK_INTERVAL_MSEC = 500;
+static const unsigned int HPAGE_FRAG_CHECK_INTERVAL_MSEC = 5000;
 
 /*
  * Page order with-respect-to which proactive compaction
@@ -1146,7 +1146,7 @@ isolate_success_no_list:
 		 * potentially remove one source of contention.
 		 */
 		if (cc->nr_migratepages >= COMPACT_CLUSTER_MAX &&
-		    !cc->rescan && !cc->contended) {
+		    !cc->rescan) {
 			++low_pfn;
 			break;
 		}
@@ -2781,7 +2781,7 @@ static void compact_nodes(void)
  * aggressively the kernel should compact memory in the
  * background. It takes values in the range [0, 100].
  */
-unsigned int __read_mostly sysctl_compaction_proactiveness = 20;
+unsigned int __read_mostly sysctl_compaction_proactiveness = 0;
 
 int compaction_proactiveness_sysctl_handler(struct ctl_table *table, int write,
 		void *buffer, size_t *length, loff_t *ppos)
