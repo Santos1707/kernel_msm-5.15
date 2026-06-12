@@ -7486,6 +7486,10 @@ static int __node_reclaim(struct pglist_data *pgdat, gfp_t gfp_mask, unsigned in
 		 */
 		do {
 			shrink_node(pgdat, &sc);
+			if (current_is_kswapd() && sc.priority <= 3) {
+				sc.priority = 3;
+				break;
+			}
 		} while (sc.nr_reclaimed < nr_pages && --sc.priority >= 0);
 	}
 
