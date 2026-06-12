@@ -2624,7 +2624,7 @@ static bool inactive_is_low(struct lruvec *lruvec, enum lru_list inactive_lru)
 
 	trace_android_vh_tune_inactive_ratio(&inactive_ratio, is_file_lru(inactive_lru));
 
-	return inactive * inactive_ratio < active;
+	return inactive * inactive_ratio < ((active * 5) / 4);
 }
 
 enum scan_balance {
