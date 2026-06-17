@@ -199,7 +199,7 @@ static DEFINE_SPINLOCK(sched_ravg_window_lock);
 static u64 sched_ravg_window_change_time;
 
 static unsigned int __read_mostly sched_init_task_load_windows_scaled;
-static unsigned int __read_mostly sysctl_sched_init_task_load_pct = 20;
+static unsigned int __read_mostly sysctl_sched_init_task_load_pct = 5;
 
 /* Size of bitmaps maintained to track top tasks */
 static const unsigned int top_tasks_bitmap_size =
