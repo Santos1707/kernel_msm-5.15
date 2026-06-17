@@ -132,6 +132,10 @@ int set_task_boost(int boost, u64 period)
 	if (boost) {
 		wts->boost = boost;
 		wts->boost_period = (u64)period * 1000 * 1000;
+
+	if (wts->boost_period > 120000000ULL) {
+			wts->boost_period = 120000000ULL;
+	}
 		wts->boost_expires = walt_sched_clock() + wts->boost_period;
 	} else {
 		wts->boost = 0;
