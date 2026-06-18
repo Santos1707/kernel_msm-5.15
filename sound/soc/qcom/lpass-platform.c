@@ -23,8 +23,8 @@ struct lpass_pcm_data {
 	int i2s_port;
 };
 
-#define LPASS_PLATFORM_BUFFER_SIZE	(24 *  2 * 1024)
-#define LPASS_PLATFORM_PERIODS		2
+#define LPASS_PLATFORM_BUFFER_SIZE	(12 *  2 * 1024)
+#define LPASS_PLATFORM_PERIODS		4
 
 static const struct snd_pcm_hardware lpass_platform_pcm_hardware = {
 	.info			=	SNDRV_PCM_INFO_MMAP |
