@@ -144,7 +144,7 @@ jobs:
 
           # Install KSU with SUSFS
 
-          curl -LSs "https://raw.githubusercontent.com/ReSukiSU/ReSukiSU/main/kernel/setup.sh" | bash
+          curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s dev
           echo "✔ KSU installed successfully"
           
           # Clone SUSFS4KSU for kernel patches only (not KSU integration)
